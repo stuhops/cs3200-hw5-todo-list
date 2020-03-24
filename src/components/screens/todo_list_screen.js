@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { Container, Text, H1 } from 'native-base';
 import { FlatList, StyleSheet } from 'react-native';
 import TodoListItem from '../todos/todo_list_item';
-import { getTodos } from '../../actions/todos';
+import { getLists } from '../../actions/lists';
 
 export class ListScreen extends React.Component {
   styles = StyleSheet.create({
@@ -31,11 +31,11 @@ export class ListScreen extends React.Component {
   // }
 
   componentDidMount() {
-    this.props.getTodos();
+    this.props.getLists();
   }
 
   render() {
-    if (this.props.todos.length === 0) {
+    if (this.props.lists.length === 0) {
       return (
         <Container style={this.styles.message}>
           <H1>Welcome {this.state.loadedName}!</H1>
@@ -47,7 +47,7 @@ export class ListScreen extends React.Component {
     return (
       <Container>
         <FlatList
-          data={this.props.todos}
+          data={this.props.lists}
           renderItem={({item}) => (
             <TodoListItem todo={item} />
           )}
@@ -60,10 +60,10 @@ export class ListScreen extends React.Component {
 
 select = (storeState) => {
   return {
-    todos: storeState.todos,
+    lists: storeState.lists,
   }
 };
 
 // select = ({ todos }) => ({ todos });
 
-export default connect(select, { getTodos })(ListScreen);
+export default connect(select, { getLists })(ListScreen);
