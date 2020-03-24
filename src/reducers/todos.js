@@ -1,4 +1,3 @@
-import UUID from 'uuid-js';
 import { constants } from '../actions/todos';
 const initialState = []
 
