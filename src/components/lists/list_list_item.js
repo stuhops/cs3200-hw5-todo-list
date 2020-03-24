@@ -51,7 +51,7 @@ export default class ListListItem extends React.Component {
 
   edit = (list) => {
     console.log('Edit', list.title);
-    
+
   }
 
 
@@ -63,7 +63,7 @@ export default class ListListItem extends React.Component {
         leftOpenValue={125}
         stopRightSwipe={-145}
         stopLeftSwipe={145}
-        onRowPress={console.log}
+        onRowPress={() => this.props.onPress(list)}
       >
         <View style={[this.styles.base, this.styles.hidden]}>
           {/* HIDDEN: need to swipe to see this content */}

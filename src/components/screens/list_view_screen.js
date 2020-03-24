@@ -17,21 +17,13 @@ export class ListScreen extends React.Component {
   state = {
     loadedName: 'Stu',
   }
-  // PRIMITIVE EXAMPLE OF STORAGE
-  // async componentDidMount() {
-  //   const info = {
-  //     name: 'Joseph',
-  //     birthday: '01/01/2001',
-  //   };
-  //   await AsyncStorage.setItem("@todo_app_user_name", JSON.stringify(info));
-  //   const loadedInfoJsonString = await AsyncStorage.getItem("@todo_app_user_name");
-  //   const parsedInfo = JSON.parse(loadedInfoJsonString);
-  //   this.setState({ loadedName: parsedInfo.name });
-  //   console.log(parsedInfo);
-  // }
 
   componentDidMount() {
     this.props.getLists();
+  }
+
+  markDone = (item) => {
+    console.log('Mark', item, 'as done');
   }
 
   render() {
@@ -39,7 +31,7 @@ export class ListScreen extends React.Component {
       return (
         <Container style={this.styles.message}>
           <H1>Welcome {this.state.loadedName}!</H1>
-          <Text>You do not have any todos yet, click the "New" button at the top to add a new todo.</Text>
+          <Text>You do not have any list items yet, click the "New" button at the top to add a new todo.</Text>
         </Container>
       )
     }
@@ -49,7 +41,7 @@ export class ListScreen extends React.Component {
         <FlatList
           data={this.props.lists}
           renderItem={({item}) => (
-            <ListListItem list={item} />
+            <ListListItem list={item} onPress={() => this.markDone(item)}/>
           )}
           keyExtractor={item => `todo_${item.id}`}
         />
