@@ -6,7 +6,7 @@ import { FlatList, StyleSheet } from 'react-native';
 import TodoListItem from '../todos/todo_list_item';
 import { getTodos } from '../../actions/todos';
 
-export class TodoListScreen extends React.Component {
+export class ListScreen extends React.Component {
   styles = StyleSheet.create({
     message: {
       alignItems: 'center',
@@ -66,4 +66,4 @@ select = (storeState) => {
 
 // select = ({ todos }) => ({ todos });
 
-export default connect(select, { getTodos })(TodoListScreen);
+export default connect(select, { getTodos })(ListScreen);
