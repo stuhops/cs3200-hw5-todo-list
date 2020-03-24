@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Container, Text, H1 } from 'native-base';
 import { FlatList, StyleSheet } from 'react-native';
-import TodoListItem from '../todos/todo_list_item';
+import ListListItem from '../lists/list_list_item';
 import { getLists } from '../../actions/lists';
 
 export class ListScreen extends React.Component {
@@ -49,7 +49,7 @@ export class ListScreen extends React.Component {
         <FlatList
           data={this.props.lists}
           renderItem={({item}) => (
-            <TodoListItem todo={item} />
+            <ListListItem list={item} />
           )}
           keyExtractor={item => `todo_${item.id}`}
         />

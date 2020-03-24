@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { SwipeRow } from 'react-native-swipe-list-view';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class ListListItem extends React.Component {
   styles = StyleSheet.create({
@@ -8,6 +9,9 @@ export default class ListListItem extends React.Component {
       backgroundColor: 'white',
       height: 64,
       borderBottomWidth: 1,
+    },
+    listText: {
+      fontSize: 32,
     },
     deleteButton: {
       flex: 1,
@@ -38,6 +42,19 @@ export default class ListListItem extends React.Component {
       paddingLeft: 16,
     }
   });
+
+
+  delete = (list) => {
+    console.log('Delete', list.title);
+  }
+
+
+  edit = (list) => {
+    console.log('Edit', list.title);
+    
+  }
+
+
   render() {
     const { list } = this.props;
     return (
@@ -50,16 +67,16 @@ export default class ListListItem extends React.Component {
       >
         <View style={[this.styles.base, this.styles.hidden]}>
           {/* HIDDEN: need to swipe to see this content */}
-          <TouchableOpacity onPress={console.log} style={this.styles.deleteButton}>
+          <TouchableOpacity onPress={() => this.delete(list)} style={this.styles.deleteButton}>
             <Text style={this.styles.whiteText}>DELETE</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={console.log} style={this.styles.editButton}>
+          <TouchableOpacity onPress={() => this.edit(list)} style={this.styles.editButton}>
             <Text style={this.styles.whiteText}>MODIFY</Text>
           </TouchableOpacity>
         </View>
         <View style={[this.styles.base, this.styles.visible]}>
           {/* VISIBLE: visible by default */}
-          <Text>{list.title}</Text>
+          <Text style={this.styles.listText}><Icon name={list.icon} size={24} color="blue" />   {list.title}</Text>
         </View>
       </SwipeRow>
     );
