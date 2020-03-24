@@ -17,7 +17,7 @@ export default class TodoListItem extends React.Component {
       flex: 1,
       backgroundColor: 'red',
       height: 64,
-      alignItems: 'flex-start',
+      alignItems: 'flex-end',
       justifyContent: 'center',
       paddingLeft: 16,
     },
@@ -25,7 +25,7 @@ export default class TodoListItem extends React.Component {
       flex: 1,
       backgroundColor: 'green',
       height: 64,
-      alignItems: 'flex-end',
+      alignItems: 'flex-start',
       justifyContent: 'center',
       paddingRight: 16,
     },
@@ -42,6 +42,18 @@ export default class TodoListItem extends React.Component {
       paddingLeft: 16,
     }
   });
+
+
+  delete = (todo) => {
+    console.log('Delete', todo.title);
+  }
+
+
+  edit = (todo) => {
+    console.log('Edit', todo.title);
+  }
+
+
   render() {
     const { todo } = this.props;
     return (
@@ -54,11 +66,11 @@ export default class TodoListItem extends React.Component {
       >
         <View style={[this.styles.base, this.styles.hidden]}>
           {/* HIDDEN: need to swipe to see this content */}
-          <TouchableOpacity onPress={console.log} style={this.styles.deleteButton}>
-            <Text style={this.styles.whiteText}>DELETE</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={console.log} style={this.styles.editButton}>
+          <TouchableOpacity onPress={() => this.edit(todo)} style={this.styles.editButton}>
             <Text style={this.styles.whiteText}>MODIFY</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => this.delete(todo)} style={this.styles.deleteButton}>
+            <Text style={this.styles.whiteText}>DELETE</Text>
           </TouchableOpacity>
         </View>
         <View style={[this.styles.base, this.styles.visible]}>
