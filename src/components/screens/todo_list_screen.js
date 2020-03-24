@@ -15,7 +15,7 @@ export class ListScreen extends React.Component {
   })
 
   state = {
-    loadedName: 'Joseph',
+    loadedName: 'Stu',
   }
   // PRIMITIVE EXAMPLE OF STORAGE
   // async componentDidMount() {

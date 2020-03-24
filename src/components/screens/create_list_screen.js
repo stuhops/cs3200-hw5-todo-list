@@ -1,8 +1,9 @@
 import React from 'react';
+import { Alert, StyleSheet, View, } from 'react-native';
 import { connect } from 'react-redux';
-import { createList } from '../../actions/lists';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { Container, Input, Form, Item, Label, Textarea, Button, Text } from 'native-base';
-import { StyleSheet, Alert } from 'react-native';
+import { createList } from '../../actions/lists';
 
 export class CreateListScreen extends React.Component {
   state = {
@@ -15,8 +16,23 @@ export class CreateListScreen extends React.Component {
     saveButtonContainer: {
       padding: 14,
       marginTop: 16,
-    }
-  })
+    },
+    iconRow: {
+      marginHorizontal: 16,
+      marginTop: 32,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    icon: {
+      flex: 1,
+      justifyContent: 'center',
+    },
+    iconSelected: {
+      flex: 1,
+      justifyContent: 'center',
+      backgroundColor: 'rgba(100, 100, 100, 0.5)',
+    },
+  });
 
   update = (key, value) => this.setState({ [key]: value })
 
@@ -35,6 +51,7 @@ export class CreateListScreen extends React.Component {
       this.state.title,
       this.state.icon,
     );
+
 
     this.props.navigation.goBack();
   }
@@ -58,7 +75,29 @@ export class CreateListScreen extends React.Component {
               onChangeText={text => this.update('icon', text)}
             />
           </Item>
+
+          <View style={this.styles.iconRow}>
+            <Button transparent style={this.state.icon === 'star' ? this.styles.iconSelected : this.styles.icon} onPress={() => selectIcon()}>
+              <Icon name="star" size={24} color="blue"/>
+            </Button>
+            <Button transparent style={this.state.icon === 'glass' ? this.styles.iconSelected : this.styles.icon} onPress={() => selectIcon()}>
+              <Icon name="glass" size={24} color="blue"/>
+            </Button>
+            <Button transparent style={this.state.icon === 'tint' ? this.styles.iconSelected : this.styles.icon} onPress={() => selectIcon()}>
+              <Icon name="tint" size={24} color="blue"/>
+            </Button>
+            <Button transparent style={this.state.icon === 'trophy' ? this.styles.iconSelected : this.styles.icon} onPress={() => selectIcon()}>
+              <Icon name="trophy" size={24} color="blue"/>
+            </Button>
+            <Button transparent style={this.state.icon === 'life-saver' ? this.styles.iconSelected : this.styles.icon} onPress={() => selectIcon()}>
+              <Icon name="life-saver" size={24} color="blue"/>
+            </Button>
+            <Button transparent style={this.state.icon === 'bicycle' ? this.styles.iconSelected : this.styles.icon} onPress={() => selectIcon()}>
+              <Icon name="bicycle" size={24} color="blue"/>
+            </Button>
+          </View>
         </Form>
+
         <Container style={this.styles.saveButtonContainer}>
           <Button onPress={this.save}><Text>Save</Text></Button>
         </Container>
