@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { SwipeRow } from 'react-native-swipe-list-view';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class TodoListItem extends React.Component {
   styles = StyleSheet.create({
@@ -8,6 +9,9 @@ export default class TodoListItem extends React.Component {
       backgroundColor: 'white',
       height: 64,
       borderBottomWidth: 1,
+    },
+    listText: {
+      fontSize: 32,
     },
     deleteButton: {
       flex: 1,
@@ -59,7 +63,7 @@ export default class TodoListItem extends React.Component {
         </View>
         <View style={[this.styles.base, this.styles.visible]}>
           {/* VISIBLE: visible by default */}
-          <Text>{todo.title}</Text>
+          <Text style={this.styles.listText}><Icon name={todo.icon} size={24} color="blue" />   {todo.title}</Text>
         </View>
       </SwipeRow>
     );

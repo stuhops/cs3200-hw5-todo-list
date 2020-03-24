@@ -36,6 +36,10 @@ export class CreateListScreen extends React.Component {
 
   update = (key, value) => this.setState({ [key]: value })
 
+  selectIcon = (newIcon) => {
+    this.setState({icon: newIcon})
+  }
+
   save = () => {
     if (this.state.title === '') {
       Alert.alert(
@@ -44,6 +48,16 @@ export class CreateListScreen extends React.Component {
       );
 
       this.setState({ titleMissing: true })
+
+      return;
+    }
+    else if (this.state.icon === '') {
+      Alert.alert(
+        'Missing Info',
+        'You have to provide an icon dummy!!',
+      );
+
+      this.setState({ iconMissing: true })
 
       return;
     }
@@ -68,31 +82,24 @@ export class CreateListScreen extends React.Component {
               onChangeText={text => this.update('title', text)}
             />
           </Item>
-          <Item floatingLabel>
-            <Label>Icon</Label>
-            <Input
-              value={this.state.icon}
-              onChangeText={text => this.update('icon', text)}
-            />
-          </Item>
 
           <View style={this.styles.iconRow}>
-            <Button transparent style={this.state.icon === 'star' ? this.styles.iconSelected : this.styles.icon} onPress={() => selectIcon()}>
+            <Button transparent style={this.state.icon === 'star' ? this.styles.iconSelected : this.styles.icon} onPress={() =>  this.selectIcon('star')}>
               <Icon name="star" size={24} color="blue"/>
             </Button>
-            <Button transparent style={this.state.icon === 'glass' ? this.styles.iconSelected : this.styles.icon} onPress={() => selectIcon()}>
+            <Button transparent style={this.state.icon === 'glass' ? this.styles.iconSelected : this.styles.icon} onPress={() => this.selectIcon('glass')}>
               <Icon name="glass" size={24} color="blue"/>
             </Button>
-            <Button transparent style={this.state.icon === 'tint' ? this.styles.iconSelected : this.styles.icon} onPress={() => selectIcon()}>
-              <Icon name="tint" size={24} color="blue"/>
+            <Button transparent style={this.state.icon === 'snowflake-o' ? this.styles.iconSelected : this.styles.icon} onPress={() => this.selectIcon('snowflake-o')}>
+              <Icon name="snowflake-o" size={24} color="blue"/>
             </Button>
-            <Button transparent style={this.state.icon === 'trophy' ? this.styles.iconSelected : this.styles.icon} onPress={() => selectIcon()}>
+            <Button transparent style={this.state.icon === 'trophy' ? this.styles.iconSelected : this.styles.icon} onPress={() => this.selectIcon('trophy')}>
               <Icon name="trophy" size={24} color="blue"/>
             </Button>
-            <Button transparent style={this.state.icon === 'life-saver' ? this.styles.iconSelected : this.styles.icon} onPress={() => selectIcon()}>
+            <Button transparent style={this.state.icon === 'life-saver' ? this.styles.iconSelected : this.styles.icon} onPress={() => this.selectIcon('life-saver')}>
               <Icon name="life-saver" size={24} color="blue"/>
             </Button>
-            <Button transparent style={this.state.icon === 'bicycle' ? this.styles.iconSelected : this.styles.icon} onPress={() => selectIcon()}>
+            <Button transparent style={this.state.icon === 'bicycle' ? this.styles.iconSelected : this.styles.icon} onPress={() => this.selectIcon('bicycle')}>
               <Icon name="bicycle" size={24} color="blue"/>
             </Button>
           </View>
