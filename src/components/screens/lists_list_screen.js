@@ -49,7 +49,12 @@ export class ListScreen extends React.Component {
         <FlatList
           data={this.props.lists}
           renderItem={({item}) => (
-            <ListListItem list={item} onPress={() => this.props.navigation.navigate('List View', item)}/>
+            <ListListItem 
+              list={item} 
+              onPress={
+                () => this.props.navigation.navigate('List View', {itemId: item.id})
+              }
+            />
           )}
           keyExtractor={item => `todo_${item.id}`}
         />

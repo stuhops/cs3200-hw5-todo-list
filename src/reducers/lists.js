@@ -8,6 +8,11 @@ export default function(state = initialState, action) {
         ...action.payload,
       }
       return [...state, newList];
+
+    case constants.get('CREATE_TODO'):
+      state[0].todos.push(action.payload);
+      return state; 
+
     default:
       return state;
   }

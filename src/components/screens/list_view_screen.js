@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Container, Text, H1 } from 'native-base';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, SafeAreaView, StyleSheet } from 'react-native';
+import _ from 'lodash';
 import ListListItem from '../lists/list_list_item';
-import { getLists } from '../../actions/lists';
+import { createTodo } from '../../actions/lists';
 
 export class ListScreen extends React.Component {
   styles = StyleSheet.create({
@@ -19,7 +20,7 @@ export class ListScreen extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getLists();
+    this.props.createTodo('Hello World', this.props.list.id);
   }
 
   markDone = (item) => {
@@ -27,35 +28,18 @@ export class ListScreen extends React.Component {
   }
 
   render() {
-    if (this.props.lists.length === 0) {
-      return (
-        <Container style={this.styles.message}>
-          <H1>Welcome {this.state.loadedName}!</H1>
-          <Text>You do not have any list items yet, click the "New" button at the top to add a new todo.</Text>
-        </Container>
-      )
-    }
-
     return (
-      <Container>
-        <FlatList
-          data={this.props.lists}
-          renderItem={({item}) => (
-            <ListListItem list={item} onPress={() => this.markDone(item)}/>
-          )}
-          keyExtractor={item => `todo_${item.id}`}
-        />
-      </Container>
+      <SafeAreaView>
+        <Text>{this.props.list.title}</Text>
+      </SafeAreaView>
     );
   }
 }
 
-select = (storeState) => {
+select = (storeState, props) => {
   return {
-    lists: storeState.lists,
+    list: _.find(storeState.lists, {id: props.route.params.itemId}),
   }
 };
 
-// select = ({ todos }) => ({ todos });
-
-export default connect(select, { getLists })(ListScreen);
+export default connect(select, {createTodo})(ListScreen);
