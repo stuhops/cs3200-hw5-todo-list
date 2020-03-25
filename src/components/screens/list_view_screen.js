@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { Container, Text, H1 } from 'native-base';
 import { FlatList, SafeAreaView, StyleSheet } from 'react-native';
 import _ from 'lodash';
-import ListListItem from '../lists/list_list_item';
+import TodoListItem from '../todos/todo_list_item';
 import { createTodo } from '../../actions/lists';
 
 export class ListScreen extends React.Component {
@@ -28,10 +28,31 @@ export class ListScreen extends React.Component {
   }
 
   render() {
+    debugger
+    if (this.props.list.todos.length === 0) {
+      return (
+        <Container style={this.styles.message}>
+          <H1>Welcome {this.state.loadedName}!</H1>
+          <Text>You do not have any todos yet, click the "New" button at the top to add a new todo.</Text>
+        </Container>
+      )
+    }
+
     return (
-      <SafeAreaView>
-        <Text>{this.props.list.title}</Text>
-      </SafeAreaView>
+      <Container>
+        <FlatList
+          data={this.props.list.todos}
+          renderItem={({item}) => (
+            <TodoListItem 
+              todo={item} 
+              onPress={
+                () => this.markDone(item)
+              }
+            />
+          )}
+          keyExtractor={item => `todo_${item.id}`}
+        />
+      </Container>
     );
   }
 }

@@ -55,14 +55,14 @@ export default class TodoListItem extends React.Component {
 
 
   render() {
-    const { todo } = this.props;
+    const { todo, onPress } = this.props;
     return (
       <SwipeRow
         rightOpenValue={-125}
         leftOpenValue={125}
         stopRightSwipe={-145}
         stopLeftSwipe={145}
-        onRowPress={console.log}
+        onRowPress={onPress}
       >
         <View style={[this.styles.base, this.styles.hidden]}>
           {/* HIDDEN: need to swipe to see this content */}
