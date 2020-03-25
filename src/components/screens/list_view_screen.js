@@ -5,7 +5,7 @@ import { Container, Text, H1 } from 'native-base';
 import { FlatList, SafeAreaView, StyleSheet } from 'react-native';
 import _ from 'lodash';
 import TodoListItem from '../todos/todo_list_item';
-import { createTodo } from '../../actions/lists';
+import { createTodo, markTodoDone } from '../../actions/lists';
 
 export class ListScreen extends React.Component {
   styles = StyleSheet.create({
@@ -24,11 +24,10 @@ export class ListScreen extends React.Component {
   }
 
   markDone = (item) => {
-    console.log('Mark', item, 'as done');
+    this.props.markTodoDone(item.id);
   }
 
   render() {
-    debugger
     if (this.props.list.todos.length === 0) {
       return (
         <Container style={this.styles.message}>
@@ -63,4 +62,4 @@ select = (storeState, props) => {
   }
 };
 
-export default connect(select, {createTodo})(ListScreen);
+export default connect(select, {createTodo, markTodoDone})(ListScreen);
