@@ -21,6 +21,13 @@ export default function(state = initialState, action) {
       _.find(newState[0].todos, {id: action.payload.todoId}).done = !_.find(newState[0].todos, {id: action.payload.todoId}).done;
       return newState;
 
+    case constants.get('MODIFY_LIST'):
+      newState = _.cloneDeep(state);
+      let modified = newState.filter(list => list.id === action.payload.idToMod);
+      modified[0].title = action.payload.title;
+      modified[0].icon = action.payload.icon;
+      newState = newState.filter(list => list.id !== action.payload.idToMod);
+      return [...newState, modified[0]];
 
     case constants.get('DELETE_LIST'):
       newState = _.cloneDeep(state);

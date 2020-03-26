@@ -3,7 +3,7 @@ import { Alert, StyleSheet, View, } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Container, Input, Form, Item, Label, Textarea, Button, Text } from 'native-base';
-import { createList } from '../../actions/lists';
+import { modifyList } from '../../actions/lists';
 
 export class CreateListScreen extends React.Component {
   state = {
@@ -70,9 +70,10 @@ export class CreateListScreen extends React.Component {
 
       return;
     }
-    this.props.createList(
+    this.props.modifyList(
       this.state.title,
       this.state.icon,
+      this.props.route.params.list.id,
     );
 
 
@@ -123,7 +124,7 @@ export class CreateListScreen extends React.Component {
 }
 
 const mapPropsToDispatch = {
-  createList,
+  modifyList,
 };
 
 export default connect(null, mapPropsToDispatch)(CreateListScreen);

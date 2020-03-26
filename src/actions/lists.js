@@ -6,6 +6,8 @@ export const constants = new Constants({
 
   MARK_TODO_DONE: 'MARK_TODO_DONE',
 
+  MODIFY_LIST: 'MODIFY_LIST',
+
   DELETE_LIST: 'DELETE_LIST',
   DELETE_TODO: 'DELETE_TODO',
 
@@ -34,6 +36,15 @@ export const markTodoDone = (todoId) => ({
   type: constants.get('MARK_TODO_DONE'),
   payload: {
     todoId,
+  }
+});
+
+export const modifyList = (title, icon, idToMod) => ({
+  type: constants.get('MODIFY_LIST'),
+  payload: {
+    title,
+    icon,
+    idToMod,
   }
 });
 
