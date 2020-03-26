@@ -14,13 +14,20 @@ export default function(state = initialState, action) {
       state[0].todos.push(action.payload);
       return state; 
 
+
     case constants.get('MARK_TODO_DONE'):
       _.find(state[0].todos, {id: action.payload.todoId}).done = !_.find(state[0].todos, {id: action.payload.todoId}).done;
+      return state;
+
+
+    case constants.get('DELETE_LIST'):
+      state = state.filter(list => list.id !== action.payload.listId);
       return state;
 
     case constants.get('DELETE_TODO'):
       state[0].todos = state[0].todos.filter(item => item.id !== action.payload.todoId);
       return state;
+
 
     default:
       return state;

@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { Container, Text, H1 } from 'native-base';
 import { FlatList, StyleSheet } from 'react-native';
 import ListListItem from '../lists/list_list_item';
-import { getLists } from '../../actions/lists';
+import { getLists, deleteList } from '../../actions/lists';
 
 export class ListScreen extends React.Component {
   styles = StyleSheet.create({
@@ -17,22 +17,12 @@ export class ListScreen extends React.Component {
   state = {
     loadedName: 'Stu',
   }
-  // PRIMITIVE EXAMPLE OF STORAGE
-  // async componentDidMount() {
-  //   const info = {
-  //     name: 'Joseph',
-  //     birthday: '01/01/2001',
-  //   };
-  //   await AsyncStorage.setItem("@todo_app_user_name", JSON.stringify(info));
-  //   const loadedInfoJsonString = await AsyncStorage.getItem("@todo_app_user_name");
-  //   const parsedInfo = JSON.parse(loadedInfoJsonString);
-  //   this.setState({ loadedName: parsedInfo.name });
-  //   console.log(parsedInfo);
-  // }
 
   componentDidMount() {
     this.props.getLists();
   }
+
+  delete = (id) => this.props.deleteList(id); 
 
   render() {
     if (this.props.lists.length === 0) {
@@ -51,9 +41,8 @@ export class ListScreen extends React.Component {
           renderItem={({item}) => (
             <ListListItem 
               list={item} 
-              onPress={
-                () => this.props.navigation.navigate('List View', {itemId: item.id})
-              }
+              onPress={ () => this.props.navigation.navigate('List View', {itemId: item.id}) }
+              onDelete={ () => this.delete(item.id) }
             />
           )}
           keyExtractor={item => `todo_${item.id}`}
@@ -69,4 +58,4 @@ select = (storeState) => {
   }
 };
 
-export default connect(select, { getLists })(ListScreen);
+export default connect(select, { getLists, deleteList })(ListScreen);

@@ -19,7 +19,7 @@ export default class TodoListItem extends React.Component {
       height: 64,
       alignItems: 'flex-end',
       justifyContent: 'center',
-      paddingLeft: 16,
+      paddingRight: 16,
     },
     editButton: {
       flex: 1,
@@ -54,16 +54,13 @@ export default class TodoListItem extends React.Component {
     return (
       <SwipeRow
         rightOpenValue={-125}
-        leftOpenValue={125}
+        leftOpenValue={0}
         stopRightSwipe={-145}
-        stopLeftSwipe={145}
+        stopLeftSwipe={0}
         onRowPress={onPress}
       >
         <View style={[this.styles.base, this.styles.hidden]}>
           {/* HIDDEN: need to swipe to see this content */}
-          <TouchableOpacity onPress={() => this.edit(todo)} style={this.styles.editButton}>
-            <Text style={this.styles.whiteText}>MODIFY</Text>
-          </TouchableOpacity>
           <TouchableOpacity onPress={() => onDelete(todo.id)} style={this.styles.deleteButton}>
             <Text style={this.styles.whiteText}>DELETE</Text>
           </TouchableOpacity>

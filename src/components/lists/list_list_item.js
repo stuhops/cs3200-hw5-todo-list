@@ -56,7 +56,7 @@ export default class ListListItem extends React.Component {
 
 
   render() {
-    const { list } = this.props;
+    const { list, onDelete } = this.props;
     return (
       <SwipeRow
         rightOpenValue={-125}
@@ -67,7 +67,7 @@ export default class ListListItem extends React.Component {
       >
         <View style={[this.styles.base, this.styles.hidden]}>
           {/* HIDDEN: need to swipe to see this content */}
-          <TouchableOpacity onPress={() => this.delete(list)} style={this.styles.deleteButton}>
+          <TouchableOpacity onPress={ onDelete } style={this.styles.deleteButton}>
             <Text style={this.styles.whiteText}>DELETE</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => this.edit(list)} style={this.styles.editButton}>

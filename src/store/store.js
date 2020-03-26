@@ -11,6 +11,6 @@ export default createStore(
   }),
   applyMiddleware(
     idAssigner,
-    // storage,
+    storage,
   ),
 );
