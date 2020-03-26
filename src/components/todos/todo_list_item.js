@@ -75,7 +75,11 @@ export default class TodoListItem extends React.Component {
         </View>
         <View style={[this.styles.base, this.styles.visible]}>
           {/* VISIBLE: visible by default */}
-          <Text style={this.styles.listText}><Icon name={todo.icon} size={24} color="blue" />   {todo.title}</Text>
+          <Text style={this.styles.listText}>
+            <Icon 
+              name={ todo.done ? 'check-circle' : 'check-circle-o' } 
+              size={24} 
+              color={ todo.done ? 'green' : 'gray' } />   {todo.title}</Text>
         </View>
       </SwipeRow>
     );
