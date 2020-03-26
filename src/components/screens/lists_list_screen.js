@@ -22,7 +22,9 @@ export class ListScreen extends React.Component {
     this.props.getLists();
   }
 
-  delete = (id) => this.props.deleteList(id); 
+  delete = id => this.props.deleteList(id); 
+
+  modify = list => this.props.navigation.navigate('Modify List', {list});
 
   render() {
     if (this.props.lists.length === 0) {
@@ -43,6 +45,7 @@ export class ListScreen extends React.Component {
               list={item} 
               onPress={ () => this.props.navigation.navigate('List View', {itemId: item.id}) }
               onDelete={ () => this.delete(item.id) }
+              onModify={ () => this.modify(item) }
             />
           )}
           keyExtractor={item => `todo_${item.id}`}

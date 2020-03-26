@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ListScreen from './src/components/screens/lists_list_screen';
 import ListViewScreen from './src/components/screens/list_view_screen';
 import CreateListScreen from './src/components/screens/create_list_screen';
+import ModifyListScreen from './src/components/screens/modify_list_screen';
 import store from './src/store/store';
 
 const Stack = createStackNavigator();
@@ -38,6 +39,7 @@ export default class App extends React.Component {
               })}
             />
             <Stack.Screen name="Create List" component={CreateListScreen} />
+            <Stack.Screen name="Modify List" component={ModifyListScreen} />
             <Stack.Screen name='List View' component={ListViewScreen} />
           </Stack.Navigator>
         </NavigationContainer>

@@ -43,20 +43,8 @@ export default class ListListItem extends React.Component {
     }
   });
 
-
-  delete = (list) => {
-    console.log('Delete', list.title);
-  }
-
-
-  edit = (list) => {
-    console.log('Edit', list.title);
-
-  }
-
-
   render() {
-    const { list, onDelete } = this.props;
+    const { list, onDelete, onModify } = this.props;
     return (
       <SwipeRow
         rightOpenValue={-125}
@@ -70,7 +58,7 @@ export default class ListListItem extends React.Component {
           <TouchableOpacity onPress={ onDelete } style={this.styles.deleteButton}>
             <Text style={this.styles.whiteText}>DELETE</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.edit(list)} style={this.styles.editButton}>
+          <TouchableOpacity onPress={ onModify } style={this.styles.editButton}>
             <Text style={this.styles.whiteText}>MODIFY</Text>
           </TouchableOpacity>
         </View>
