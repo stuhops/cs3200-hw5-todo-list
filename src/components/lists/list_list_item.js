@@ -13,17 +13,17 @@ export default class ListListItem extends React.Component {
     listText: {
       fontSize: 32,
     },
-    deleteButton: {
+    editButton: {
       flex: 1,
-      backgroundColor: 'red',
+      backgroundColor: 'green',
       height: 64,
       alignItems: 'flex-start',
       justifyContent: 'center',
       paddingLeft: 16,
     },
-    editButton: {
+    deleteButton: {
       flex: 1,
-      backgroundColor: 'green',
+      backgroundColor: 'red',
       height: 64,
       alignItems: 'flex-end',
       justifyContent: 'center',
@@ -55,11 +55,11 @@ export default class ListListItem extends React.Component {
       >
         <View style={[this.styles.base, this.styles.hidden]}>
           {/* HIDDEN: need to swipe to see this content */}
-          <TouchableOpacity onPress={ onDelete } style={this.styles.deleteButton}>
-            <Text style={this.styles.whiteText}>DELETE</Text>
-          </TouchableOpacity>
           <TouchableOpacity onPress={ onModify } style={this.styles.editButton}>
             <Text style={this.styles.whiteText}>MODIFY</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={ onDelete } style={this.styles.deleteButton}>
+            <Text style={this.styles.whiteText}>DELETE</Text>
           </TouchableOpacity>
         </View>
         <View style={[this.styles.base, this.styles.visible]}>
