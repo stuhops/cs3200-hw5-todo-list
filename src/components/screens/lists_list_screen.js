@@ -31,7 +31,7 @@ export class ListScreen extends React.Component {
       return (
         <Container style={this.styles.message}>
           <H1>Welcome {this.state.loadedName}!</H1>
-          <Text>You do not have any todos yet, click the "New" button at the top to add a new todo.</Text>
+          <Text>You do not have any lists yet, click the "New" button at the top to add a new list.</Text>
         </Container>
       )
     }
@@ -48,7 +48,7 @@ export class ListScreen extends React.Component {
               onModify={ () => this.modify(item) }
             />
           )}
-          keyExtractor={item => `todo_${item.id}`}
+          keyExtractor={item => `list_${item.id}`}
         />
       </Container>
     );

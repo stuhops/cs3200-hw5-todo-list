@@ -1,26 +1,30 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import { constants } from '../actions/todos';
+import { constants } from '../actions/lists';
 
 export default (store) => (next) => (action) => {
   const result = next(action);
-  if (action.type === constants.get('GET_TODOS')) {
+  if (action.type === constants.get('GET_LISTS')) {
     AsyncStorage
-      .getItem('@todos')
-      .then((todosJson) => {
-        let todos = [];
-        if (todosJson) {
-          todos = JSON.parse(todosJson);
+      .getItem('@lists')
+      .then((listsJson) => {
+        let lists = [];
+        if (listsJson) {
+          lists = JSON.parse(listsJson);
         }
+        debugger
         store.dispatch({
-          type: constants.get('GET_TODOS_DONE'),
-          payload: todos,
+          type: constants.get('GET_LISTS_DONE'),
+          payload: lists,
         });
       })
       .catch(console.log);
-  } else if(action.type !== constants.get('GET_TODOS_DONE')) {
+  } 
+
+  else if(action.type !== constants.get('GET_LISTS_DONE')) {
     AsyncStorage
-      .setItem('@todos', JSON.stringify(store.getState().todos))
+      .setItem('@lists', JSON.stringify(store.getState().todos))
       .catch(console.log)
   }
+
   return result;
 }

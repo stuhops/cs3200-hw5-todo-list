@@ -12,6 +12,7 @@ export const constants = new Constants({
   DELETE_TODO: 'DELETE_TODO',
 
   GET_LISTS: 'GET_LISTS',
+  GET_LISTS_DONE: 'GET_LISTS_DONE',
 });
 
 export const createList = (title, icon) => ({

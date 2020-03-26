@@ -39,6 +39,8 @@ export default function(state = initialState, action) {
       newState[0].todos = newState[0].todos.filter(item => item.id !== action.payload.todoId);
       return newState;
 
+    case constants.get('GET_LISTS_DONE'):
+      return action.payload;
 
     default:
       return state;
