@@ -5,7 +5,7 @@ import { Container, Input, Item, Text, H1 } from 'native-base';
 import { Alert, FlatList, SafeAreaView, StyleSheet } from 'react-native';
 import _ from 'lodash';
 import TodoListItem from '../todos/todo_list_item';
-import { createTodo, markTodoDone } from '../../actions/lists';
+import { createTodo, markTodoDone, deleteTodo } from '../../actions/lists';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export class ListScreen extends React.Component {
@@ -29,7 +29,11 @@ export class ListScreen extends React.Component {
     newTodo: '',
   }
 
-  update = (key, value) => this.setState({ [key]: value })
+  update = (key, value) => this.setState({ [key]: value });
+
+  delete = item => this.props.deleteTodo(item.id);
+
+  markDone = item => this.props.markTodoDone(item.id);
 
   addTodo = () => {
     if (this.state.newTodo === '') {
@@ -43,9 +47,6 @@ export class ListScreen extends React.Component {
     this.setState({newTodo: ''});
   }
 
-  markDone = (item) => {
-    this.props.markTodoDone(item.id);
-  }
 
   render() {
     return (
@@ -55,6 +56,7 @@ export class ListScreen extends React.Component {
             placeholder='New Todo' 
             value={this.state.newTodo}
             onChangeText={text => this.update('newTodo', text)}
+            onSubmitEditing={() => this.addTodo()}
           />
           <Icon 
             name="plus" 
@@ -69,9 +71,8 @@ export class ListScreen extends React.Component {
           renderItem={({item}) => (
             <TodoListItem 
               todo={item} 
-              onPress={
-                () => this.markDone(item)
-              }
+              onPress={ () => this.markDone(item) }
+              onDelete={ () => this.delete(item) }
             />
           )}
           keyExtractor={item => `todo_${item.id}`}
@@ -87,4 +88,4 @@ select = (storeState, props) => {
   }
 };
 
-export default connect(select, {createTodo, markTodoDone})(ListScreen);
+export default connect(select, {createTodo, markTodoDone, deleteTodo})(ListScreen);

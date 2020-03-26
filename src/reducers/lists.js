@@ -18,6 +18,10 @@ export default function(state = initialState, action) {
       _.find(state[0].todos, {id: action.payload.todoId}).done = !_.find(state[0].todos, {id: action.payload.todoId}).done;
       return state;
 
+    case constants.get('DELETE_TODO'):
+      state[0].todos = state[0].todos.filter(item => item.id !== action.payload.todoId);
+      return state;
+
     default:
       return state;
   }

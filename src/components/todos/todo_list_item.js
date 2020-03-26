@@ -44,18 +44,13 @@ export default class TodoListItem extends React.Component {
   });
 
 
-  delete = (todo) => {
-    console.log('Delete', todo.title);
-  }
-
-
   edit = (todo) => {
     console.log('Edit', todo.title);
   }
 
 
   render() {
-    const { todo, onPress } = this.props;
+    const { todo, onPress, onDelete } = this.props;
     return (
       <SwipeRow
         rightOpenValue={-125}
@@ -69,7 +64,7 @@ export default class TodoListItem extends React.Component {
           <TouchableOpacity onPress={() => this.edit(todo)} style={this.styles.editButton}>
             <Text style={this.styles.whiteText}>MODIFY</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.delete(todo)} style={this.styles.deleteButton}>
+          <TouchableOpacity onPress={() => onDelete(todo.id)} style={this.styles.deleteButton}>
             <Text style={this.styles.whiteText}>DELETE</Text>
           </TouchableOpacity>
         </View>
