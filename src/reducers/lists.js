@@ -3,6 +3,7 @@ import _ from 'lodash';
 const initialState = []
 
 export default function(state = initialState, action) {
+  let newState;
   switch (action.type) {
     case constants.get('CREATE_LIST'):
       const newList = {
@@ -11,22 +12,25 @@ export default function(state = initialState, action) {
       return [...state, newList];
 
     case constants.get('CREATE_TODO'):
-      state[0].todos.push(action.payload);
-      return state; 
-
+      newState = _.cloneDeep(state);
+      newState[0].todos.push(action.payload);
+      return newState; 
 
     case constants.get('MARK_TODO_DONE'):
-      _.find(state[0].todos, {id: action.payload.todoId}).done = !_.find(state[0].todos, {id: action.payload.todoId}).done;
-      return state;
+      newState = _.cloneDeep(state);
+      _.find(newState[0].todos, {id: action.payload.todoId}).done = !_.find(newState[0].todos, {id: action.payload.todoId}).done;
+      return newState;
 
 
     case constants.get('DELETE_LIST'):
-      state = state.filter(list => list.id !== action.payload.listId);
-      return state;
+      newState = _.cloneDeep(state);
+      newState = newState.filter(list => list.id !== action.payload.listId);
+      return newState;
 
     case constants.get('DELETE_TODO'):
-      state[0].todos = state[0].todos.filter(item => item.id !== action.payload.todoId);
-      return state;
+      newState = _.cloneDeep(state);
+      newState[0].todos = newState[0].todos.filter(item => item.id !== action.payload.todoId);
+      return newState;
 
 
     default:
